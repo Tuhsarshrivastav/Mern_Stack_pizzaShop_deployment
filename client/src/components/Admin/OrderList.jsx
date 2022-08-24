@@ -13,7 +13,7 @@ const OrderList = () => {
   }, [dispatch]);
   return (
     <div>
-      <h1>Order Lists</h1>
+      <h4 className="text-center">Order Lists</h4>
       {loading && <Loader />}
       {error && <Error error="Admin Order req fail" />}
       <Table striped bordered hover>

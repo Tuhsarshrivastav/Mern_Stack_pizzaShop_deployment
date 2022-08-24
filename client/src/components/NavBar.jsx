@@ -4,11 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { logoutUser } from "../actions/userAction";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 const NavBar = () => {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state.cartReducer);
   const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
+  const history = useHistory();
+
+  const logout = () => {
+    dispatch(logoutUser());
+    history.push("/login");
+  };
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -31,13 +39,13 @@ const NavBar = () => {
                     <LinkContainer to="/orders">
                       <NavDropdown.Item>orders</NavDropdown.Item>
                     </LinkContainer>
-                    <NavDropdown.Item
-                      onClick={() => {
-                        dispatch(logoutUser());
-                      }}
-                    >
-                      Logout
-                    </NavDropdown.Item>
+                    {currentUser.isAdmin === true && (
+                      <LinkContainer to="/admin">
+                        <NavDropdown.Item>Admin Panel</NavDropdown.Item>
+                      </LinkContainer>
+                    )}
+
+                    <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 </LinkContainer>
               ) : (

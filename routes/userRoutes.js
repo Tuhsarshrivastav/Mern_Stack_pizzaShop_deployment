@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
-
+const bcrypt = require("bcrypt");
 router.post("/register", (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email } = req.body;
+  const password = bcrypt.hashSync(req.body.password, 10);
   const newUser = new User({ name, email, password });
   try {
     newUser.save();
@@ -21,8 +22,9 @@ router.post("/register", (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.find({ email, password });
-    if (user.length > 0) {
+    const user = await User.find({ email });
+    if (user) {
+      bcrypt.compare(password, user.password);
       const currentUser = {
         name: user[0].name,
         email: user[0].email,
@@ -36,7 +38,7 @@ router.post("/login", async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(404).json({
+    res.status(400).json({
       message: "Something Went wrong",
     });
   }

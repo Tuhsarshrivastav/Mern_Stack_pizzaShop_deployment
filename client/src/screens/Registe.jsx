@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Success from "../components/Success";
 import Error from "../components/Error";
+import { useHistory } from "react-router-dom";
 
 const Registe = () => {
   const registerState = useSelector((state) => state.registerUserReducer);
   const { error, success, loading } = registerState;
+  const history = useHistory();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,11 +21,12 @@ const Registe = () => {
   const dispatch = useDispatch();
 
   const registerhandler = () => {
-    if (password !== confrimPassword) {
+    if (password !== confrimPassword && !name && !email) {
       alert("Password do not match");
     } else {
       const user = { name, email, password, confrimPassword };
       dispatch(registerUser(user));
+      history.push("/login");
     }
   };
   return (
@@ -73,10 +76,6 @@ const Registe = () => {
               value={confrimPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
           <Button variant="primary" onClick={registerhandler}>
             Register

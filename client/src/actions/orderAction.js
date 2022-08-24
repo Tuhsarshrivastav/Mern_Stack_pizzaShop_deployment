@@ -5,17 +5,15 @@ export const placeOrder = (token, subTotal) => async (dispatch, getState) => {
   const currentUser = getState().loginUserReducer.currentUser;
   const cartItems = getState().cartReducer.cartItems;
   try {
-    const res = await axios.post("/api/orders/placeorder", {
+    await axios.post("/api/orders/placeorder", {
       token,
       subTotal,
       currentUser,
       cartItems,
     });
     dispatch({ type: "PLACE_ORDER_SUCCESS" });
-    
   } catch (error) {
     dispatch({ type: "PLACE_ORDER_FAIL" });
-  
   }
 };
 
@@ -28,7 +26,7 @@ export const getUserOrders = () => async (dispatch, getState) => {
     const response = await axios.post("/api/orders/getuserorder", {
       userid: currentUser._id,
     });
-   
+
     dispatch({ type: "USER_ORDER_SUCCESS", payload: response.data });
   } catch (error) {
     dispatch({ type: "USER_ORDER_FAIL", payload: error });
@@ -53,7 +51,7 @@ export const deliverOrder = (orderid) => async (dispatch, getState) => {
     type: "GET_ALL_ORDER_REQUEST",
   });
   try {
-    const response = await axios.post("/api/orders/deliverorder", { orderid });
+    await axios.post("/api/orders/deliverorder", { orderid });
     alert("Deliverd Success");
     const orders = await axios.get("/api/orders/alluserorder");
     dispatch({ type: "GET_ALL_ORDER_SUCCESS", payload: orders.data });

@@ -14,7 +14,11 @@ const CartScreen = () => {
       <Container>
         <Row>
           <Col md={6}>
-            <h1>My Cart</h1>
+            {cartItems.length > 0 ? (
+              <h4 style={{ marginTop: "10%" }}>My Cart</h4>
+            ) : (
+              ""
+            )}
             <Row>
               {cartItems.map((item) => (
                 <>
@@ -71,12 +75,21 @@ const CartScreen = () => {
               ))}
             </Row>
           </Col>
-          <Col md={4}>
-            <h1>Payment Info</h1>
-            <h4>Sub Total </h4>
-            <h4>RS : {subTotal} /-</h4>
-            <Checkout subTotal={subTotal} />
-          </Col>
+          {cartItems.length > 0 ? (
+            <Col md={4}>
+              <h4 style={{ marginTop: "10%" }}>Payment Info</h4>
+              <h4>Sub Total </h4>
+              <h4>RS : {subTotal} /-</h4>
+              <Checkout subTotal={subTotal} />
+            </Col>
+          ) : (
+            <div
+              style={{ marginTop: "15%" }}
+              className="d-flex justify-content-center   align-items-center"
+            >
+              <h2 className="">There is no items in cart</h2>
+            </div>
+          )}
         </Row>
       </Container>
     </>

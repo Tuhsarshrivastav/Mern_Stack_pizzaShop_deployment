@@ -25,6 +25,7 @@ export const loginUser = (user) => async (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("currentUser");
+  localStorage.removeItem("cartitems");
   window.location.href = "/login";
 };
 
@@ -40,7 +41,7 @@ export const getAllUsers = () => async (dispatch) => {
 
 export const deleteUser = (userid) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/users/deleteuser", { userid });
+    await axios.post("/api/users/deleteuser", { userid });
     swal("User Deleted Succss!", "success");
     window.location.reload();
   } catch (error) {

@@ -21,7 +21,7 @@ const Pizzaslist = () => {
       ) : error ? (
         <Error>Error while fetching pizzas {error}</Error>
       ) : (
-        <div>
+        <div style={{ height: "200px" }}>
           <Table striped bordered hover>
             <thead>
               <tr>

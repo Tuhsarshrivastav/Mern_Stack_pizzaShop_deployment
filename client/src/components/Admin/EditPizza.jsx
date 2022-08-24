@@ -33,7 +33,7 @@ const EditPizza = ({ match }) => {
     } else {
       dispatch(getPizzaById(match.params.pizzaId));
     }
-  }, [pizza, dispatch]);
+  }, [pizza, dispatch, match.params.pizzaId]);
   const submitForm = (e) => {
     e.preventDefault();
     const updatedPizza = {

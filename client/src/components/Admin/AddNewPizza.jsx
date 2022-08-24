@@ -47,7 +47,7 @@ const AddNewPizza = () => {
               type="text"
               value={name}
               onChange={(e) => setname(e.target.value)}
-              placeholder="Enter email"
+              placeholder="Enter pizza name"
             />
           </Form.Group>
           <Row className="mb-3 mt-3">
@@ -77,7 +77,7 @@ const AddNewPizza = () => {
                 type="text"
                 value={largprice}
                 onChange={(e) => setlargprice(e.target.value)}
-                placeholder="Enter larg price"
+                placeholder="Enter large price"
               />
             </Form.Group>
           </Row>
@@ -111,7 +111,6 @@ const AddNewPizza = () => {
             placeholder="Enter Category"
           />
         </Form.Group>
-
         <Button variant="primary" type="submit">
           Add New
         </Button>

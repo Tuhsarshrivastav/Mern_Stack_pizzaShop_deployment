@@ -19,7 +19,7 @@ const Pizza = ({ pizza }) => {
 
   return (
     <>
-      <Card style={{ width: "18rem", marginTop: "30px" }}>
+      <Card style={{ width: "18rem", marginTop: "30px", marginBottom: "50px" }}>
         <Card.Img
           variant="top"
           src={pizza.image}
@@ -61,10 +61,7 @@ const Pizza = ({ pizza }) => {
           <Row>
             <Col md={6}>Price : {pizza.prices[0][varient] * quantity} /-RS</Col>
             <Col md={6}>
-              <Button
-                onClick={addToCartHandler}
-                className="bg-dark text-white"
-              >
+              <Button onClick={addToCartHandler} className="bg-dark text-white">
                 Add to cart
               </Button>
             </Col>
