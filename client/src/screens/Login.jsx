@@ -3,7 +3,13 @@ import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../actions/userAction";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Loader from "../components/Loader";
+import Success from "../components/Success";
+import Error from "../components/Error";
 const Login = () => {
+  const registerState = useSelector((state) => state.loginUserReducer);
+  const { error, success, loading } = registerState;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -15,13 +21,16 @@ const Login = () => {
   }, [history]);
   const loginHandler = () => {
     const user = { email, password };
-    dispatch(loginUser(user));
+    dispatch(loginUser(user, history));
     localStorage.removeItem("currentUser");
-    history.push("/");
+    // history.push("/");
   };
   return (
     <>
       <Container>
+        {loading && <Loader />}
+        {success && <Success success="User Login Successfully" />}
+        {error && <Error error="somthing went wrong" />}
         <Row className="d-flex justify-content-center   align-items-center">
           <Col md={6}>
             <h5 style={{ marginTop: "12%" }}>Login</h5>
@@ -31,6 +40,7 @@ const Login = () => {
                 <Form.Control
                   type="email"
                   value={email}
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter email"
                 />
@@ -43,6 +53,7 @@ const Login = () => {
                 <Form.Control
                   type="password"
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                 />

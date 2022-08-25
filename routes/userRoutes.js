@@ -2,8 +2,14 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
+
 router.post("/register", (req, res) => {
   const { name, email } = req.body;
+  if ((!name, !email)) {
+    return res.status(400).json({
+      message: "Fill all the fields",
+    });
+  }
   const password = bcrypt.hashSync(req.body.password, 10);
   const newUser = new User({ name, email, password });
   try {
@@ -23,8 +29,8 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.find({ email });
-    if (user) {
-      bcrypt.compare(password, user.password);
+    if (user.length > 0) {
+      bcrypt.compare(password, user[0].password);
       const currentUser = {
         name: user[0].name,
         email: user[0].email,

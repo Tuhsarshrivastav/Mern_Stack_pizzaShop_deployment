@@ -25,8 +25,7 @@ const Registe = () => {
       alert("Password do not match");
     } else {
       const user = { name, email, password, confrimPassword };
-      dispatch(registerUser(user));
-      history.push("/login");
+      dispatch(registerUser(user, history));
     }
   };
   return (

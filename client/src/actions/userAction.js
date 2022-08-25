@@ -1,29 +1,31 @@
 import axios from "axios";
 import swal from "sweetalert";
-export const registerUser = (user) => async (dispatch) => {
+export const registerUser = (user, history) => async (dispatch) => {
   dispatch({ type: "USER_REGISTER_REQUEST" });
   try {
-    await axios.post("/api/users/register", user);
+    const response = await axios.post("/api/users/register", user);
+    console.log(response);
+    if (response.status === 200) history.push("/login");
+
     dispatch({ type: "USER_REGISTER_SUCCESS" });
   } catch (error) {
     dispatch({ type: "USER_REGISTER_FAIL", payload: error });
   }
 };
 
-export const loginUser = (user) => async (dispatch) => {
+export const loginUser = (user, history) => async (dispatch) => {
   dispatch({ type: "USER_LOGIN_REQUEST" });
   try {
     const response = await axios.post("/api/users/login", user);
-
+    if (response.status === 200) history.push("/");
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: response.data });
     localStorage.setItem("currentUser", JSON.stringify(response.data));
-    window.location.href = "/";
   } catch (error) {
     dispatch({ type: "USER_LOGIN_FAIL", payload: error });
   }
 };
 
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = (history) => (dispatch) => {
   localStorage.removeItem("currentUser");
   localStorage.removeItem("cartitems");
   window.location.href = "/login";

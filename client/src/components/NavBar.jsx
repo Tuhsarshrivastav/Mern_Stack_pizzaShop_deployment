@@ -4,18 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { logoutUser } from "../actions/userAction";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state.cartReducer);
   const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
-  const history = useHistory();
 
   const logout = () => {
     dispatch(logoutUser());
-    history.push("/login");
   };
   return (
     <>

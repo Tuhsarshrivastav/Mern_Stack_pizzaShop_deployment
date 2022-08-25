@@ -38,7 +38,7 @@ const Userlist = () => {
                   <AiFillDelete
                     style={{ color: "red", cursor: "pointer" }}
                     onClick={() => {
-                      dispatch(deleteUser(user._id));
+                      dispatch(deleteUser(user._id, dispatch, useEffect));
                     }}
                   />
                 </td>

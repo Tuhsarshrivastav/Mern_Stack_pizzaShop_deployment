@@ -24,11 +24,3 @@ const importData = async () => {
     process.exit(1);
   }
 };
-
-const dataDestroy = () => {};
-
-if (process.argv[2] === "-d") {
-  dataDestroy();
-} else {
-  importData();
-}

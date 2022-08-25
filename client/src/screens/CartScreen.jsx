@@ -1,11 +1,15 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { FaMinusCircle, FaPlusCircle, FaTrash } from "react-icons/fa";
 import { addToCart, deleteFromCart } from "../actions/cartAction";
+import { Link } from "react-router-dom";
 import Checkout from "../components/Checkout";
 const CartScreen = () => {
   const cartState = useSelector((state) => state.cartReducer);
+  const userState = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userState;
+  console.log(currentUser);
   const cartItems = cartState.cartItems;
   const dispatch = useDispatch();
   const subTotal = cartItems.reduce((x, item) => x + item.price, 0);
@@ -80,7 +84,13 @@ const CartScreen = () => {
               <h4 style={{ marginTop: "10%" }}>Payment Info</h4>
               <h4>Sub Total </h4>
               <h4>RS : {subTotal} /-</h4>
-              <Checkout subTotal={subTotal} />
+              {currentUser === null ? (
+                <Link to="/login">
+                  <Button>Login Before Buy</Button>
+                </Link>
+              ) : (
+                <Checkout subTotal={subTotal} />
+              )}
             </Col>
           ) : (
             <div
