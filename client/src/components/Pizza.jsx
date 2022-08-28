@@ -29,6 +29,8 @@ const Pizza = ({ pizza }) => {
 
         <Card.Body>
           <Card.Title>{pizza.name}</Card.Title>
+          <Card.Title>Quantity:{pizza.isQuantity}</Card.Title>
+
           <hr />
           <Card.Text>
             <Row>
@@ -59,7 +61,7 @@ const Pizza = ({ pizza }) => {
             </Row>
           </Card.Text>
           <Row>
-            <Col md={6}>Price : {pizza.prices[0][varient] * quantity} /-RS</Col>
+            <Col md={6}>Price : {pizza.price * quantity} /-RS</Col>
             <Col md={6}>
               <Button onClick={addToCartHandler} className="bg-dark text-white">
                 Add to cart

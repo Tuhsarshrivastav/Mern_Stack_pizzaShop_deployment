@@ -1,10 +1,11 @@
 import axios from "axios";
 import swal from "sweetalert";
+
 export const getAllPizzas = () => async (dispatch) => {
   dispatch({ type: "GET_PIZZAS_REQUEST" });
   try {
     const response = await axios.get("/api/pizzas/getAllPizzas");
-
+    console.log(response.data);
     dispatch({ type: "GET_PIZZAS_SUCCESS", payload: response.data });
   } catch (err) {
     dispatch({ type: "GET_PIZZAS_FAIL", payload: err });
@@ -53,21 +54,33 @@ export const deletePizza = (pizzaId) => async (dispatch) => {
   }
 };
 
-export const filterPizza = (searchkey, category) => async (dispatch) => {
-  let filterdPizza;
-  dispatch({ type: "GET_PIZZAS_REQUEST" });
-  try {
+export const filterPizza =
+  (searchkey, category, searchPrice, searchByQuanity) => async (dispatch) => {
+    let filterdPizza;
+
+    dispatch({ type: "GET_PIZZAS_REQUEST" });
     const res = await axios.get("/api/pizzas/getAllPizzas");
-    filterdPizza = res.data.filter((pizza) =>
-      pizza.name.toLowerCase().includes(searchkey)
-    );
-    if (category !== "all") {
-      filterdPizza = res.data.filter(
-        (pizza) => pizza.category.toLowerCase() === category
+
+    try {
+      const res = await axios.get("/api/pizzas/getAllPizzas");
+      filterdPizza = res.data.filter((pizza) =>
+        pizza.name.toLowerCase().includes(searchkey)
       );
+      if (category !== "all") {
+        filterdPizza = res.data.filter(
+          (pizza) => pizza.category.toLowerCase() === category
+        );
+      }
+      if (searchPrice !== "AllPrice") {
+        filterdPizza = res.data.filter((pizza) => pizza.price == searchPrice);
+      }
+      if (searchByQuanity !== "AllQTY") {
+        filterdPizza = res.data.filter(
+          (pizza) => pizza.isQuantity == searchByQuanity
+        );
+      }
+      dispatch({ type: "GET_PIZZAS_SUCCESS", payload: filterdPizza });
+    } catch (error) {
+      dispatch({ type: "GET_PIZZAS_FAIL", payload: error });
     }
-    dispatch({ type: "GET_PIZZAS_SUCCESS", payload: filterdPizza });
-  } catch (error) {
-    dispatch({ type: "GET_PIZZAS_FAIL", payload: error });
-  }
-};
+  };

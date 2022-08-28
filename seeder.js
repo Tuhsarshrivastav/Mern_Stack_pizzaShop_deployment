@@ -24,3 +24,9 @@ const importData = async () => {
     process.exit(1);
   }
 };
+const dataDestory = () => {};
+if (process.argv[2] === "-d") {
+  dataDestory();
+} else {
+  importData();
+}

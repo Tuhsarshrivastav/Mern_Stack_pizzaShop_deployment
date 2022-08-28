@@ -2,6 +2,8 @@ const pizzas = [
   {
     name: "Margherita",
     varients: ["small", "medium", "large"],
+    price: "100",
+    isQuantity: "5",
     prices: [
       {
         small: 99,
@@ -16,6 +18,8 @@ const pizzas = [
   {
     name: "Farmhouse",
     varients: ["small", "medium", "large"],
+    price: "200",
+    isQuantity: "5",
     prices: [
       {
         small: 229,
@@ -31,6 +35,9 @@ const pizzas = [
   {
     name: "Veggie Paradise",
     varients: ["small", "medium", "large"],
+    price: "300",
+    isQuantity: "10",
+
     prices: [
       {
         small: 180,
@@ -46,6 +53,8 @@ const pizzas = [
   {
     name: "Chicken Golden Delight",
     varients: ["small", "medium", "large"],
+    price: "400",
+    isQuantity: "10",
     prices: [
       {
         small: 249,
@@ -61,6 +70,8 @@ const pizzas = [
   {
     name: "Chicken Pepperoni",
     varients: ["small", "medium", "large"],
+    price: "500",
+    isQuantity: "15",
     prices: [
       {
         small: 320,
@@ -76,6 +87,8 @@ const pizzas = [
   {
     name: "Indi Chicken Tikka",
     varients: ["small", "medium", "large"],
+    price: "500",
+    isQuantity: "15",
     prices: [
       {
         small: 250,

@@ -5,6 +5,14 @@ const pizzaSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    price: {
+      type: String,
+      required: true,
+    },
+    isQuantity: {
+      type: String,
+      required: true,
+    },
     varients: [],
     prices: [],
     category: {
