@@ -18,15 +18,16 @@
   },
   "author": "tushar",
   "license": "MIT",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "colors": "^1.4.0",
-    "concurrently": "^6.2.0",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.13.3",
-    "morgan": "^1.10.0",
-    "stripe": "^8.176.0",
-    "uuid": "^8.3.2"
-  }
+"dependencies": {
+  "bcrypt": "^5.0.1",
+  "colors": "^1.4.0",
+  "concurrently": "^6.2.0",
+  "cors": "^2.8.5",
+  "dotenv": "^10.0.0",
+  "express": "^4.17.1",
+  "mongoose": "^5.13.3",
+  "morgan": "^1.10.0",
+  "stripe": "^8.176.0",
+  "uuid": "^8.3.2"
+}
 }
