@@ -15,11 +15,9 @@ connectDB();
 const app = express();
 
 // middlewares
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+const cors = require("cors");
+
+app.use(cors());
 
 app.use(express.json());
 app.use(morgan("dev"));
