@@ -15,7 +15,6 @@ connectDB();
 const app = express();
 
 // middlewares
-const cors = require("cors");
 
 app.use(cors());
 
